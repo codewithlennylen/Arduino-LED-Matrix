@@ -13,9 +13,16 @@ const double delay_between_chars = 800;
 
 // function prototypes
 void power_on_test();
+void loading();
 void sequence_processor(int arr[][cols]);
 void draw_character(int arr[][cols]);
 void draw_word(String str);
+
+void lenny();
+void selfa();
+void jazz();
+void beryl();
+void cynthia();
 // void switch_row(int *row, int state);
 // void switch_col(int col, int state);
 
@@ -327,19 +334,55 @@ void setup()
 void loop()
 {
 
+char state;
 
-  draw_word("LENNY");
+  if(Serial.available() > 0){ // Checks whether data is comming from the serial port
+    state = Serial.read(); // Reads the data from the serial port
+ }
+
+ if (state == 'l') {
+   power_on_test();
+   lenny();
+   state='0';
+ }
+ else if (state == 's') {
+   power_on_test();
+selfa();
+state='0';
+ } 
+  else if (state == 'j') {
+    power_on_test();
+    jazz();
+    state='0';
+ } 
+  else if (state == 'b') {
+    power_on_test();
+    beryl();
+    state='0';
+ } 
+   else if (state == 'c') {
+     power_on_test();
+    cynthia();
+    state='0';
+ } else{
+   loading();
+ }
+
+state='0';
+  // draw_word("LENNY");
   // sequence_processor(A);
-  draw_character(L);
-  delay(delay_between_chars);
-  draw_character(E);
-  delay(delay_between_chars);
-  draw_character(N);
-  delay(delay_between_chars);
-  draw_character(N);
-  delay(delay_between_chars);
-  draw_character(Y);
-  delay(delay_between_chars);
+  // draw_character(L);
+  // delay(delay_between_chars);
+  // draw_character(E);
+  // delay(delay_between_chars);
+  // draw_character(N);
+  // delay(delay_between_chars);
+  // draw_character(N);
+  // delay(delay_between_chars);
+  // draw_character(Y);
+  // delay(delay_between_chars);
+
+  // loading();
 
   // put your main code here, to run repeatedly:
   // switch_row(0,1);
@@ -349,6 +392,22 @@ void loop()
   // switch_col(0,1);
   // delay(500);
 }
+
+
+void loading(){
+  digitalWrite(row_pins[2], HIGH);
+  digitalWrite(col_pins[1],LOW);
+  digitalWrite(col_pins[2],LOW);
+  digitalWrite(col_pins[3],LOW);
+  delay(500);
+  digitalWrite(row_pins[2], LOW);
+  digitalWrite(col_pins[1],HIGH);
+  digitalWrite(col_pins[2],HIGH);
+  digitalWrite(col_pins[3],HIGH);
+  delay(500);
+
+}
+
 
 void power_on_test()
 {
@@ -361,7 +420,7 @@ void power_on_test()
       digitalWrite(row_pins[row], HIGH);
       // switch_row(&row,1);
       digitalWrite(col_pins[col], LOW);
-      delay(200);
+      delay(75);
       digitalWrite(row_pins[row], LOW);
       digitalWrite(col_pins[col], HIGH);
     }
@@ -414,6 +473,80 @@ void power_on_test()
 // };
 
 
+void lenny(){
+  draw_character(L);
+  delay(delay_between_chars);
+  draw_character(E);
+  delay(delay_between_chars);
+  draw_character(N);
+  delay(delay_between_chars);
+  draw_character(N);
+  delay(delay_between_chars);
+  draw_character(Y);
+  delay(delay_between_chars);
+}
+
+void selfa(){
+  draw_character(S);
+  delay(delay_between_chars);
+  draw_character(E);
+  delay(delay_between_chars);
+  draw_character(L);
+  delay(delay_between_chars);
+  draw_character(F);
+  delay(delay_between_chars);
+  draw_character(A);
+  delay(delay_between_chars);
+}
+
+void jazz(){
+  draw_character(J);
+  delay(delay_between_chars);
+  draw_character(A);
+  delay(delay_between_chars);
+  draw_character(S);
+  delay(delay_between_chars);
+  draw_character(M);
+  delay(delay_between_chars);
+  draw_character(I);
+  delay(delay_between_chars);
+  draw_character(N);
+  delay(delay_between_chars);
+  draw_character(E);
+  delay(delay_between_chars);
+}
+
+void beryl(){
+  draw_character(B);
+  delay(delay_between_chars);
+  draw_character(E);
+  delay(delay_between_chars);
+  draw_character(R);
+  delay(delay_between_chars);
+  draw_character(Y);
+  delay(delay_between_chars);
+  draw_character(L);
+  delay(delay_between_chars);
+}
+
+
+
+void cynthia(){
+  draw_character(C);
+  delay(delay_between_chars);
+  draw_character(Y);
+  delay(delay_between_chars);
+  draw_character(N);
+  delay(delay_between_chars);
+  draw_character(T);
+  delay(delay_between_chars);
+  draw_character(H);
+  delay(delay_between_chars);
+  draw_character(I);
+  delay(delay_between_chars);
+  draw_character(A);
+  delay(delay_between_chars);
+}
 void draw_word(String str){
   int str_length = str.length();
 
